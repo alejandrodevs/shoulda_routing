@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = ShouldaRouting::VERSION
   spec.authors       = ["Alejandro Gutiérrez"]
   spec.email         = ["alejandrodevs@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = "A simple and easy DSL to test rails routes."
+  spec.summary       = "A simple DSL to test rails routes."
+  spec.homepage      = "https://github.com/alejandrogutierrez/shoulda_routing"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

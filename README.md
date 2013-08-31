@@ -1,6 +1,6 @@
 # ShouldaRouting
 
-TODO: Write a gem description
+A simple and easy DSL to test rails routes.
 
 ## Installation
 
