@@ -37,9 +37,6 @@ module ShouldaRouting
       QueueResources.pop
     end
 
-    def namespace namespace
-    end
-
     def member
       QueueResourcesTypes.push(:member)
       yield(self) if block_given?
