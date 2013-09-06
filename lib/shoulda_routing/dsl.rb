@@ -3,7 +3,7 @@ module ShouldaRouting
 
     def resources resource, args = {}
       Queues.nested_resources.push(resource)
-      routes.resource(args).each{ |spec| instance_eval(&spec) }
+      restful_routes.resource(args).each{ |spec| instance_eval(&spec) }
       yield if block_given?
       Queues.nested_resources.pop
     end
@@ -20,20 +20,20 @@ module ShouldaRouting
       Queues.resouces_types.pop
     end
 
-    [:get, :post, :put, :patch, :delete].each do |method|
-      define_method "#{method}_action" do |action|
-        instance_eval(&route.resource(action: action, method: method))
+    [:get, :post, :put, :patch, :delete].each do |via|
+      define_method "#{via}_action" do |action|
+        instance_eval(&single_route.resource(action: action, method: via))
       end
     end
 
     private
 
-      def routes
-        @routes ||= Routes::Restful.new
+      def restful_routes
+        @restful_routes ||= Routes::Restful.new
       end
 
-      def route
-        @route  ||= Routes::Single.new
+      def single_route
+        @single_route ||= Routes::Single.new
       end
 
   end

@@ -16,6 +16,16 @@ Or install it yourself as:
 
     $ gem install shoulda_routing
 
+## Getting started
+
+Add this line in your rspec configuration
+
+```ruby
+RSpec.configure do |config|
+  config.extend ShouldaRouting::DSL
+end
+```
+
 ## Usage
 
 TODO: Write usage instructions here
