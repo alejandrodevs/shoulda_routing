@@ -1,6 +1,6 @@
 # ShouldaRouting
 
-A simple and easy DSL to test rails routes. The gem aims to provide a
+A simple and easy DSL to test rails routes. This gem aims to provide a faster way to do the boring routing tests.
 
 ## Installation
 
@@ -10,7 +10,7 @@ Add this line to your application's Gemfile:
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
@@ -26,7 +26,7 @@ RSpec.configure do |config|
 end
 ```
 
-## Usage
+## Basic usage
 
 In your routes.rb file:
 
