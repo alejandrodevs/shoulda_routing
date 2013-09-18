@@ -1,6 +1,6 @@
 module ShouldaRouting
   class Resources
-    extend ResourcesMethods
+    include ResourcesMethod
 
     cattr_accessor :current
 
@@ -8,68 +8,56 @@ module ShouldaRouting
       @nested ||= []
     end
 
-    def self.specs args
-      options = generate_local_bindings
+    def actions
+      [:index, :new, :edit, :create, :update, :show, :destroy]
+    end
 
-      Proc.new do
-        it "routes to index" do
-          send(:get, options[:index_path]).should route_to("#{options[:resource]}#index", options[:route_params])
-        end
-
-        it "routes to new" do
-          send(:get, options[:new_path]).should route_to("#{options[:resource]}#new", options[:route_params])
-        end
-
-        it "routes to edit" do
-          send(:get, options[:edit_path]).should route_to("#{options[:resource]}#edit", options[:route_params].merge(id: "1"))
-        end
-
-        it "routes to create" do
-          send(:post, options[:create_path]).should route_to("#{options[:resource]}#create", options[:route_params])
-        end
-
-        it "routes to update" do
-          send(:put, options[:update_path]).should route_to("#{options[:resource]}#update", options[:route_params].merge(id: "1"))
-        end
-
-        it "routes to show" do
-          send(:get, options[:show_path]).should route_to("#{options[:resource]}#show", options[:route_params].merge(id: "1"))
-        end
-
-        it "routes to destroy" do
-          send(:delete, options[:destroy_path]).should route_to("#{options[:resource]}#destroy", options[:route_params].merge(id: "1"))
-        end
+    def specs args
+      actions.map do |action|
+        SpecGenerator.generate!(
+          via(action),
+          path(action),
+          current,
+          action,
+          options(action)
+        )
       end
     end
 
-    def self.path
+    def via action
+      case action
+      when :index, :new, :edit, :show then :get
+      when :create  then :post
+      when :update  then :put
+      when :destroy then :delete
+      end
+    end
+
+    def path action
+      basic_path + case action
+      when :new  then "/new"
+      when :edit then "/1/edit"
+      when :update, :show, :destroy then "/1"
+      else ""
+      end
+    end
+
+    def basic_path
       "#{nested_path}/#{current}"
     end
 
-    def self.nested_path
-      "/#{nested.join("/1/")}/1" if nested.present?
+    def nested_path
+      "/#{self.class.nested.join("/1/")}/1" if self.class.nested.present?
     end
 
-    def self.generate_local_bindings
-      {
-        :resource     => current,
-        :index_path   => path,
-        :new_path     => path + "/new",
-        :edit_path    => path + "/1/edit",
-        :create_path  => path,
-        :update_path  => path + "/1",
-        :show_path    => path + "/1",
-        :destroy_path => path + "/1",
-        :route_params => route_params
-      }
-    end
-
-    def self.route_params
+    def options action
       options = {}
-      nested.each do |resource|
+      options.merge!(id: "1") if [:edit, :update, :show, :destroy].include?(action)
+      self.class.nested.each do |resource|
         options.merge!({:"#{resource.to_s.singularize}_id" => "1"})
       end
       options
     end
+
   end
 end

@@ -3,5 +3,6 @@ module ShouldaRouting
   autoload :Resources,  'shoulda_routing/resources.rb'
   autoload :VERSION,    'shoulda_routing/version.rb'
 
-  autoload :ResourcesMethods, 'shoulda_routing/resources_methods.rb'
+  autoload :ResourcesMethod, 'shoulda_routing/resources_method.rb'
+  autoload :SpecGenerator,   'shoulda_routing/spec_generator.rb'
 end
