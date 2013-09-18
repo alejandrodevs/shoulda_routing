@@ -1,6 +1,6 @@
 # ShouldaRouting
 
-A simple and easy DSL to test rails routes.
+A simple and easy DSL to test rails routes. The gem aims to provide a
 
 ## Installation
 
@@ -18,17 +18,37 @@ Or install it yourself as:
 
 ## Getting started
 
-Add this line in your rspec configuration
+Add this line in your rspec configuration:
 
 ```ruby
 RSpec.configure do |config|
-  config.extend ShouldaRouting::DSL
+  config.extend ShouldaRouting::DSL  # <= This line...
 end
 ```
 
 ## Usage
 
-TODO: Write usage instructions here
+In your routes.rb file:
+
+```ruby
+YourApp::Application.routes.draw do
+  resources :users do
+    resources :posts
+  end
+end
+```
+
+In your routing_spec.rb file:
+
+```ruby
+require 'spec_helper'
+
+describe "Routes" do
+  resources :users do
+    resources :posts
+  end
+end
+```
 
 ## Contributing
 
