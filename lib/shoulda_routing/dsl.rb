@@ -2,7 +2,7 @@ module ShouldaRouting
   module DSL
 
     # Includes resources method to the DSL.
-    include ResourcesMethod
+    include Resources::Method
 
   end
 end

@@ -1,15 +1,13 @@
+require 'shoulda_routing/resources/dsl'
+
 module ShouldaRouting
   class Resources
-    include ResourcesMethod
+    include DSL
 
     cattr_accessor :current
 
     def self.nested
       @nested ||= []
-    end
-
-    def actions
-      [:index, :new, :edit, :create, :update, :show, :destroy]
     end
 
     def specs args
