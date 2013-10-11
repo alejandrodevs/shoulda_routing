@@ -11,11 +11,13 @@ module ShouldaRouting
       end
 
       def test!
-        actions.each do |action|
+        STACK.push(current)
 
+        actions.each do |action, via|
+          spec = Spec::Generator.new(action: action, method: via).generate
+          Spec::Runner.execute(spec)
         end
 
-        STACK.push(current)
         DSL.instance_eval(&block) if block
         STACK.pop
       end
@@ -23,7 +25,15 @@ module ShouldaRouting
       private
 
       def actions
-        [:index, :new, :edit, :create, :update, :show, :destroy]
+        {
+          :index   => :get,
+          :new     => :get,
+          :edit    => :get,
+          :show    => :get,
+          :create  => :post,
+          :update  => :put,
+          :destroy => :delete
+        }
       end
 
     end

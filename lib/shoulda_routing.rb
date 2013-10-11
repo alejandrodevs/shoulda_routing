@@ -8,4 +8,9 @@ module ShouldaRouting
     autoload :Method, 'shoulda_routing/resources/method.rb'
     autoload :STACK,  'shoulda_routing/resources/stack.rb'
   end
+
+  module Spec
+    autoload :Generator, 'shoulda_routing/spec/generator.rb'
+    autoload :Runner,    'shoulda_routing/spec/runner.rb'
+  end
 end
