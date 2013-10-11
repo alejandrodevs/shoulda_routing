@@ -10,7 +10,6 @@ module ShouldaRouting
   end
 
   module Spec
-    autoload :Generator, 'shoulda_routing/spec/generator.rb'
-    autoload :Runner,    'shoulda_routing/spec/runner.rb'
+    autoload :Base, 'shoulda_routing/spec/base.rb'
   end
 end

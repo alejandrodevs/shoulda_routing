@@ -4,7 +4,7 @@ module ShouldaRouting
 
       attr_accessor :current, :options, :block
 
-      def initialize args, &block
+      def initialize *args, &block
         @options = args.extract_options!
         @current = args
         @block   = block
@@ -14,8 +14,7 @@ module ShouldaRouting
         STACK.push(current)
 
         actions.each do |action, via|
-          spec = Spec::Generator.new(action: action, method: via).generate
-          Spec::Runner.execute(spec)
+          Spec::Base.new(action: action, method: via).run!
         end
 
         DSL.instance_eval(&block) if block
