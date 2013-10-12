@@ -15,7 +15,7 @@ module ShouldaRouting
       def test!
         STACK.push(current)
 
-        actions.each do |action, args|
+        routeable_actions.each do |action, args|
           Spec.execute!({
             :via        => args[:via],
             :path       => generate_path(STACK.flatten, suffix: args[:path]),
@@ -41,6 +41,21 @@ module ShouldaRouting
           :update  => { via: :put, path: "/1", params: { id: "1" }},
           :destroy => { via: :delete, path: "/1", params: { id: "1" }}
         }
+      end
+
+      def routeable_actions
+        @routeable_actions ||= begin
+          routeable_actions = actions.keys
+          routeable_actions = actions.keys & Array(options[:only]) if options[:only]
+          routeable_actions = actions.keys - Array(options[:except]) if options[:except]
+          actions.select{ |action, args| routeable_actions.include?(action) }
+        end
+      end
+
+      def unrouteable_actions
+        @unrouteable_actions ||= begin
+          actions.select{ |action, args| !routeable_actions.include?(action) }
+        end
       end
 
     end
