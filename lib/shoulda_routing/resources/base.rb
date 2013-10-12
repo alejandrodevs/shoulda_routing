@@ -1,6 +1,8 @@
 module ShouldaRouting
   module Resources
     class Base
+      include Helpers::Path
+      include Helpers::Params
 
       attr_accessor :current, :options, :block
 
@@ -13,8 +15,14 @@ module ShouldaRouting
       def test!
         STACK.push(current)
 
-        actions.each do |action, via|
-          Spec::Base.new(action: action, method: via).run!
+        actions.each do |action, args|
+          Spec.execute!({
+            :via        => args[:via],
+            :path       => generate_path(STACK.flatten, suffix: args[:path]),
+            :controller => STACK.flatten.last,
+            :action     => action,
+            :params     => generate_params(STACK.flatten, Hash(args[:params]))
+          })
         end
 
         DSL.instance_eval(&block) if block
@@ -25,13 +33,13 @@ module ShouldaRouting
 
       def actions
         {
-          :index   => :get,
-          :new     => :get,
-          :edit    => :get,
-          :show    => :get,
-          :create  => :post,
-          :update  => :put,
-          :destroy => :delete
+          :index   => { via: :get },
+          :new     => { via: :get, path: "/new" },
+          :edit    => { via: :get, path: "/1/edit", params: { id: "1" }},
+          :show    => { via: :get, path: "/1", params: { id: "1" }},
+          :create  => { via: :post},
+          :update  => { via: :put, path: "/1", params: { id: "1" }},
+          :destroy => { via: :delete, path: "/1", params: { id: "1" }}
         }
       end
 
