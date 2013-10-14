@@ -1,8 +1,7 @@
 module ShouldaRouting
   module Resources
     class Base
-      include Helpers::Path
-      include Helpers::Params
+      include Helpers::Route
 
       attr_accessor :current, :options, :block
 
@@ -14,17 +13,6 @@ module ShouldaRouting
 
       def test!
         STACK.push(current)
-
-        routeable_actions.each do |action, args|
-          Spec.execute!({
-            :via        => args[:via],
-            :path       => generate_path(STACK.flatten, suffix: args[:path]),
-            :controller => STACK.flatten.last,
-            :action     => action,
-            :params     => generate_params(STACK.flatten, Hash(args[:params]))
-          })
-        end
-
         DSL.instance_eval(&block) if block
         STACK.pop
       end

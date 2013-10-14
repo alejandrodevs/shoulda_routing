@@ -11,7 +11,6 @@ module ShouldaRouting
   end
 
   module Helpers
-    autoload :Path,   'shoulda_routing/helpers/path.rb'
-    autoload :Params, 'shoulda_routing/helpers/params.rb'
+    autoload :Route,  'shoulda_routing/helpers/route.rb'
   end
 end

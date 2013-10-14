@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module ShouldaRouting
   module Helpers
-    describe Path do
+    describe Route do
       let!(:subject){ Class.send(:include, described_class).tap(&:new) }
 
       describe "#generate_path" do
