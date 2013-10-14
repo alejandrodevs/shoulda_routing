@@ -7,6 +7,13 @@ module ShouldaRouting
         "/#{stack.join("/1/")}" + options[:suffix].to_s
       end
 
+      # Returns the combinations according to an array
+      # passed by param. This is in order to generate all
+      # the nested routes.
+      def route_combinations stack
+        # pending
+      end
+
     end
   end
 end
