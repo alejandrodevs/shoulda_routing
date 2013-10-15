@@ -39,10 +39,10 @@ module ShouldaRouting
       def actions
         {
           :index   => { via: :get },
+          :create  => { via: :post },
           :new     => { via: :get, path: "/new" },
           :edit    => { via: :get, path: "/1/edit", params: { id: "1" }},
           :show    => { via: :get, path: "/1", params: { id: "1" }},
-          :create  => { via: :post},
           :update  => { via: :put, path: "/1", params: { id: "1" }},
           :destroy => { via: :delete, path: "/1", params: { id: "1" }}
         }
