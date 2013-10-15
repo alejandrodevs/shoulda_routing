@@ -13,11 +13,28 @@ module ShouldaRouting
 
       def test!
         STACK.push(current)
+
+        route_permutations(STACK).each do |stack|
+          specs_for(routeable_actions, stack)
+        end
+
         DSL.instance_eval(&block) if block
         STACK.pop
       end
 
       private
+
+      def specs_for actions, stack
+        actions.each do |action, args|
+          Spec.execute!({
+            :via        => args[:via],
+            :path       => route_path(stack, suffix: args[:path]),
+            :controller => stack.last,
+            :action     => action,
+            :params     => route_params(stack, Hash(args[:params]))
+          })
+        end
+      end
 
       def actions
         {

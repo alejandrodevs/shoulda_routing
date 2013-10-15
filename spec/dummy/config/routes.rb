@@ -1,12 +1,8 @@
 Dummy::Application.routes.draw do
+  resources :users
+  resources :comments, :likes
 
-  resources :users do
-    resources :posts do
-      resources :comments do
-        resources :likes
-      end
-    end
+  resources :posts do
+    resources :comments, :likes
   end
-
-  # root 'welcome#index'
 end
