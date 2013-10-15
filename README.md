@@ -1,4 +1,4 @@
-# ShouldaRouting
+# ShouldaRouting [![Build Status](https://travis-ci.org/alejandrogutierrez/shoulda_routing.png?branch=master)](https://travis-ci.org/alejandrogutierrez/shoulda_routing) [![Coverage Status](https://coveralls.io/repos/alejandrogutierrez/shoulda_routing/badge.png)](https://coveralls.io/r/alejandrogutierrez/shoulda_routing)
 
 A simple and easy DSL to test rails routes. This gem aims to provide a faster way to do the boring routing tests. The DSL looks like the rails routes DSL that is used in the routes.rb file.
 
