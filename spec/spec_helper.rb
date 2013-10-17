@@ -1,4 +1,5 @@
 require 'shoulda_routing'
+require 'rails/all'
 
 require 'coveralls'
 Coveralls.wear!

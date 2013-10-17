@@ -33,7 +33,13 @@ In your routes.rb file:
 ```ruby
 YourApp::Application.routes.draw do
   resources :users do
-    resources :posts
+    resources :posts, only: [:index , :show]
+  end
+
+  resources :states, :cities
+
+  resources :countries do
+    resources :states, :cities, except: [:destroy]
   end
 end
 ```
@@ -45,7 +51,13 @@ require 'spec_helper'
 
 describe "Routes" do
   resources :users do
-    resources :posts
+    resources :posts, only: [:index , :show]
+  end
+
+  resources :states, :cities
+
+  resources :countries do
+    resources :states, :cities, except: [:destroy]
   end
 end
 ```

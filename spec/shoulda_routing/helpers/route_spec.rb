@@ -7,8 +7,8 @@ module ShouldaRouting
 
       describe "#route_path" do
         it "returns string path accoring to an array" do
-          stack    = [:one, :two, :three]
-          expected = "/one/1/two/1/three"
+          stack    = [:users, :posts, :likes]
+          expected = "/users/1/posts/1/likes"
           expect(subject.route_path(stack)).to eq(expected)
         end
       end
@@ -36,6 +36,14 @@ module ShouldaRouting
           stack     = [[1, 2], [3], [4, 5]]
           expected  = [[1, 3, 4], [1, 3, 5], [2, 3, 4], [2, 3, 5]]
           expect(subject.route_permutations(stack)).to eq(expected)
+        end
+      end
+
+      describe "#route_params" do
+        it "returns params accoring to an array" do
+          stack     = [:users, :posts, :likes]
+          expected  = {user_id: "1", post_id: "1"}
+          expect(subject.route_params(stack)).to eq(expected)
         end
       end
     end

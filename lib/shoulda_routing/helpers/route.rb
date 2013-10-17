@@ -13,7 +13,7 @@ module ShouldaRouting
         stack.inject(&:product).map{|e| e.flatten rescue [e]}
       end
 
-      def route_params stack, options
+      def route_params stack, options = {}
         params = {}
         stack[0...stack.size - 1].each do |resource|
           params[:"#{resource.to_s.singularize}_id"] = "1"
