@@ -31,7 +31,7 @@ module ShouldaRouting
             :path       => route_path(stack, suffix: args[:path]),
             :controller => stack.last,
             :action     => action,
-            :params     => route_params(stack, Hash(args[:params]))
+            :params     => route_params(stack, args[:params] || {})
           })
         end
       end
