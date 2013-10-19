@@ -14,3 +14,9 @@ module ShouldaRouting
     autoload :Route,  'shoulda_routing/helpers/route.rb'
   end
 end
+
+if defined? RSpec
+  RSpec.configure do |config|
+    config.extend ShouldaRouting::DSL
+  end
+end

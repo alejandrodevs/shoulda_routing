@@ -16,26 +16,13 @@ Or install it yourself as:
 
     $ gem install shoulda_routing
 
-## Getting started
-
-Add this line in your rspec configuration:
-
-```ruby
-RSpec.configure do |config|
-  config.extend ShouldaRouting::DSL
-end
-```
-
 ## Basic usage
 
 In your routes.rb file:
 
 ```ruby
 YourApp::Application.routes.draw do
-  resources :users do
-    resources :posts, only: [:index , :show]
-  end
-
+  resources :posts, only: [:index , :show]
   resources :states, :cities
 
   resources :countries do
@@ -50,10 +37,7 @@ In your routing_spec.rb file:
 require 'spec_helper'
 
 describe "Routes" do
-  resources :users do
-    resources :posts, only: [:index , :show]
-  end
-
+  resources :posts, only: [:index , :show]
   resources :states, :cities
 
   resources :countries do
