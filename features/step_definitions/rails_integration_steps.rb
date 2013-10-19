@@ -10,9 +10,12 @@ When 'I generate a new rails application' do
   }
 end
 
-When 'I generate scaffolds' do
+When /^I generate resources "([^\"]+)"$/ do |resources|
+  resources.split(" ").each do |resource|
+    steps %{ When I successfully run `rails generate scaffold #{resource}` }
+  end
+
   steps %{
-    When I successfully run `rails generate scaffold User`
     When I successfully run `bundle exec rake db:migrate RAILS_ENV=test`
   }
 end
@@ -36,7 +39,7 @@ When 'I run the rspec generator' do
 end
 
 When 'I run routing specs' do
-  steps %{When I successfully run `bundle exec rspec spec/routing/routing_spec.rb`}
+  steps %{When I successfully run `bundle exec rspec spec/routing/routing_spec.rb --failure-exit-code 0`}
 end
 
 module FileHelpers
