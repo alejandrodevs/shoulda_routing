@@ -35,6 +35,10 @@ When 'I run the rspec generator' do
   steps %{When I successfully run `rails generate rspec:install`}
 end
 
+When 'I run routing specs' do
+  steps %{When I successfully run `bundle exec rspec spec/routing/routing_spec.rb`}
+end
+
 module FileHelpers
   def append_to(path, contents)
     in_current_dir do

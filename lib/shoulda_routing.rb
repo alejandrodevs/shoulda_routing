@@ -16,7 +16,5 @@ module ShouldaRouting
 end
 
 if defined? RSpec
-  RSpec.configure do |config|
-    config.extend ShouldaRouting::DSL
-  end
+  RSpec.configure{ |config| config.extend ShouldaRouting::DSL }
 end
