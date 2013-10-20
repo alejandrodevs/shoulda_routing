@@ -30,7 +30,7 @@ module ShouldaRouting
           Routes::Spec.execute do |config|
             config.via        = args[:via]
             config.path       = route_path(stack, suffix: args[:path])
-            config.controller = stack.last
+            config.controller = options[:controller] || stack.last
             config.action     = action
             config.params     = route_params(stack, args[:params] || {})
             config.method     = spec_method
