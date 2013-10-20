@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 module ShouldaRouting
-  module Helpers
-    describe Route do
+  module Routes
+    describe Helpers do
       let!(:subject){ Class.send(:include, described_class).tap(&:new) }
 
       describe "#route_path" do

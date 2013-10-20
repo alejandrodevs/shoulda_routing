@@ -1,6 +1,6 @@
 module ShouldaRouting
-  module Helpers
-    module Route
+  module Routes
+    module Helpers
 
       # Returns a string path according to an array.
       def route_path stack, options = {}

@@ -1,7 +1,7 @@
 module ShouldaRouting
   module Resources
     class Base
-      include Helpers::Route
+      include Routes::Helpers
 
       attr_accessor :current, :options, :block
 
@@ -16,6 +16,7 @@ module ShouldaRouting
 
         route_permutations(STACK).each do |stack|
           specs_for(routeable_actions, stack)
+          specs_for(unrouteable_actions, stack, :not_to)
         end
 
         DSL.instance_eval(&block) if block
@@ -24,15 +25,16 @@ module ShouldaRouting
 
       private
 
-      def specs_for actions, stack
+      def specs_for actions, stack, spec_method = :to
         actions.each do |action, args|
-          Spec.execute!({
-            :via        => args[:via],
-            :path       => route_path(stack, suffix: args[:path]),
-            :controller => stack.last,
-            :action     => action,
-            :params     => route_params(stack, args[:params] || {})
-          })
+          Routes::Spec.execute do |config|
+            config.via        = args[:via]
+            config.path       = route_path(stack, suffix: args[:path])
+            config.controller = stack.last
+            config.action     = action
+            config.params     = route_params(stack, args[:params] || {})
+            config.method     = spec_method
+          end
         end
       end
 
