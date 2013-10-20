@@ -12,12 +12,21 @@ end
 
 When /^I generate resources "([^\"]+)"$/ do |resources|
   resources.split(" ").each do |resource|
-    steps %{ When I successfully run `rails generate scaffold #{resource}` }
+    steps %{
+      When I write to "app/controllers/#{resource.pluralize}_controller.rb" with:
+        """
+        class #{resource.pluralize.camelcase}Controller < ApplicationController
+          def index; end
+          def show; end
+          def edit; end
+          def update; end
+          def create; end
+          def new; end
+          def destroy; end
+        end
+        """
+    }
   end
-
-  steps %{
-    When I successfully run `bundle exec rake db:migrate RAILS_ENV=test`
-  }
 end
 
 When /^I configure the application to use "([^\"]+)"$/ do |name|
