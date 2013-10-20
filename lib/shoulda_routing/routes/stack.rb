@@ -1,5 +1,5 @@
 module ShouldaRouting
-  module Resources
+  module Routes
     STACK = []
   end
 end

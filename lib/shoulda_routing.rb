@@ -6,12 +6,12 @@ module ShouldaRouting
     autoload :Base,   'shoulda_routing/resources/base.rb'
     autoload :DSL,    'shoulda_routing/resources/dsl.rb'
     autoload :Method, 'shoulda_routing/resources/method.rb'
-    autoload :STACK,  'shoulda_routing/resources/stack.rb'
   end
 
   module Routes
     autoload :Spec,    'shoulda_routing/routes/spec.rb'
     autoload :Helpers, 'shoulda_routing/routes/helpers.rb'
+    autoload :STACK,   'shoulda_routing/routes/stack.rb'
   end
 end
 

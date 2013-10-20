@@ -12,15 +12,15 @@ module ShouldaRouting
       end
 
       def test!
-        STACK.push(current)
+        Routes::STACK.push(current)
 
-        route_permutations(STACK).each do |stack|
+        route_permutations(Routes::STACK).each do |stack|
           specs_for(routeable_actions, stack)
           specs_for(unrouteable_actions, stack, :not_to)
         end
 
         DSL.instance_eval(&block) if block
-        STACK.pop
+        Routes::STACK.pop
       end
 
       private
