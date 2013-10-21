@@ -11,11 +11,11 @@ Feature: Test resources with options
     Given I write to "config/routes.rb" with:
       """
       TestApp::Application.routes.draw do
-        resources :posts, except: [:destroy]
+      resources :posts, except: [:destroy, :update]
 
         resources :users do
-          resources :posts, :comments, except: [:destroy]
-          resources :likes, only: [:index]
+          resources :posts, :comments, except: :destroy
+          resources :likes, only: :index
         end
 
         resources :parents, controller: "users"
@@ -27,11 +27,11 @@ Feature: Test resources with options
       require 'spec_helper'
 
       describe 'Routes' do
-      resources :posts, except: [:destroy, :update]
+        resources :posts, except: [:destroy, :update]
 
         resources :users do
           resources :posts, :comments, except: [:destroy, :show]
-          resources :likes, only: [:destroy]
+          resources :likes, only: :destroy
         end
 
         resources :parents, controller: "users"
@@ -39,4 +39,4 @@ Feature: Test resources with options
       end
       """
     When I run routing specs
-    Then the output should contain "49 examples, 12 failures"
+    Then the output should contain "49 examples, 11 failures"

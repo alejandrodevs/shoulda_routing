@@ -1,6 +1,7 @@
 # ShouldaRouting [![Build Status](https://travis-ci.org/alejandrogutierrez/shoulda_routing.png?branch=master)](https://travis-ci.org/alejandrogutierrez/shoulda_routing) [![Coverage Status](https://coveralls.io/repos/alejandrogutierrez/shoulda_routing/badge.png)](https://coveralls.io/r/alejandrogutierrez/shoulda_routing)
 
-A simple and easy DSL to test rails routes. This gem aims to provide a faster way to do the boring routing tests. The DSL looks like the rails routes DSL that is used in the routes.rb file.
+This gem aims to provide a simple DSL that looks like the rails routes DSL that is used in the routes.rb file.
+It requires the [RSpec](https://github.com/rspec/rspec-rails) testing framework.
 
 ## Installation
 
@@ -22,12 +23,15 @@ In your routes.rb file:
 
 ```ruby
 YourApp::Application.routes.draw do
-  resources :posts, only: [:index , :show]
-  resources :states, :cities
+  resources :users
+  resources :posts, :accounts, :roles
 
   resources :countries do
-    resources :states, :cities, except: [:destroy]
+    resources :states, :cities, except: :destroy
   end
+
+  resources :comments, only: [:index, :show]
+  resources :parents, controller: "users"
 end
 ```
 
@@ -37,14 +41,37 @@ In your routing_spec.rb file:
 require 'spec_helper'
 
 describe "Routes" do
-  resources :posts, only: [:index , :show]
-  resources :states, :cities
+  resources :users
+  resources :posts, :accounts, :roles
 
   resources :countries do
-    resources :states, :cities, except: [:destroy]
+    resources :states, :cities, except: :destroy
   end
+
+  resources :comments, only: [:index, :show]
+  resources :parents, controller: "users"
 end
 ```
+
+## TO-DO
+
+* Support namespaces
+* Support member and collection routes.
+* Support single resources (get, post, put, delete) actions.
+
+## Testing
+
+To run the test suite you should run the default rake task:
+
+    $ bundle exec rake
+
+To run the unit tests:
+
+    $ bundle exec rake spec:unit
+
+To run the integration tests:
+
+    $ bundle exec cucumber
 
 ## Contributing
 

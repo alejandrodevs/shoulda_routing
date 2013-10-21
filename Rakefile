@@ -6,17 +6,12 @@ namespace :spec do
     system("bundle exec rspec")
   end
 
-  desc "Runs integration tests"
-  task :cucumber do
-    system("bundle exec cucumber")
-  end
-
   desc "Run all tests"
   task :all do
     Rake.application['spec:unit'].invoke
     raise "Unit testing failed!" unless $?.exitstatus == 0
 
-    Rake.application['spec:cucumber'].invoke
+    system("bundle exec cucumber")
     raise "Integration testing failed!" unless $?.exitstatus == 0
   end
 end
