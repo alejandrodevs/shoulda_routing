@@ -1,7 +1,7 @@
 # ShouldaRouting [![Build Status](https://travis-ci.org/alejandrogutierrez/shoulda_routing.png?branch=master)](https://travis-ci.org/alejandrogutierrez/shoulda_routing) [![Coverage Status](https://coveralls.io/repos/alejandrogutierrez/shoulda_routing/badge.png)](https://coveralls.io/r/alejandrogutierrez/shoulda_routing)
 
 This gem aims to provide a simple DSL that looks like the rails routes DSL that is used in the routes.rb file.
-It requires the [RSpec](https://github.com/rspec/rspec-rails) testing framework.
+This requires the [RSpec](https://github.com/rspec/rspec-rails) testing framework.
 
 ## Installation
 
@@ -31,7 +31,7 @@ YourApp::Application.routes.draw do
   end
 
   resources :comments, only: [:index, :show]
-  resources :parents, controller: "users"
+  resources :parents, controller: :users
 end
 ```
 
@@ -49,7 +49,7 @@ describe "Routes" do
   end
 
   resources :comments, only: [:index, :show]
-  resources :parents, controller: "users"
+  resources :parents, controller: :users
 end
 ```
 

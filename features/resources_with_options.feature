@@ -18,7 +18,7 @@ Feature: Test resources with options
           resources :likes, only: :index
         end
 
-        resources :parents, controller: "users"
+        resources :parents, controller: :users
         resources :observations
       end
       """
@@ -34,8 +34,8 @@ Feature: Test resources with options
           resources :likes, only: :destroy
         end
 
-        resources :parents, controller: "users"
-        resources :observations, controller: "comments"
+        resources :parents, controller: :users
+        resources :observations, controller: :comments
       end
       """
     When I run routing specs
