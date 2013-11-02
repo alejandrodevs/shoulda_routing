@@ -11,7 +11,9 @@ module ShouldaRouting
       end
 
       def test!
+        Routes::STACK.namespaces.push(current)
         DSL.instance_eval(&block) if block
+        Routes::STACK.namespaces.pop
       end
     end
   end
