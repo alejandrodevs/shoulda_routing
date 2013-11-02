@@ -2,6 +2,12 @@ module ShouldaRouting
   autoload :DSL,     'shoulda_routing/dsl.rb'
   autoload :VERSION, 'shoulda_routing/version.rb'
 
+  module Namespaces
+    autoload :Base,   'shoulda_routing/namespaces/base.rb'
+    autoload :DSL,    'shoulda_routing/namespaces/dsl.rb'
+    autoload :Method, 'shoulda_routing/namespaces/method.rb'
+  end
+
   module Resources
     autoload :Base,   'shoulda_routing/resources/base.rb'
     autoload :DSL,    'shoulda_routing/resources/dsl.rb'
