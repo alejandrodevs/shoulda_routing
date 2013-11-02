@@ -23,15 +23,19 @@ In your routes.rb file:
 
 ```ruby
 YourApp::Application.routes.draw do
-  resources :users
-  resources :posts, :accounts, :roles
+  namespace :admin do
+    resources :users
+    resources :posts, only: [:index, :show]
 
-  resources :countries do
-    resources :states, :cities, except: :destroy
+    namespace :mobile do
+      resources :users
+      resources :parents, controller: :users
+    end
   end
 
-  resources :comments, only: [:index, :show]
-  resources :parents, controller: :users
+  resources :users, except: :destroy do
+    resources :posts, :comments
+  end
 end
 ```
 
@@ -41,21 +45,25 @@ In your routing_spec.rb file:
 require 'spec_helper'
 
 describe "Routes" do
-  resources :users
-  resources :posts, :accounts, :roles
+  namespace :admin do
+    resources :users
+    resources :posts, only: [:index, :show]
 
-  resources :countries do
-    resources :states, :cities, except: :destroy
+    namespace :mobile do
+      resources :users
+      resources :parents, controller: :users
+    end
   end
 
-  resources :comments, only: [:index, :show]
-  resources :parents, controller: :users
+  resources :users, except: :destroy do
+    resources :posts, :comments
+  end
 end
 ```
+This will generate the necessary tests for all rails routes above.
 
 ## TO-DO
 
-* Support namespaces
 * Support member and collection routes.
 * Support single resources (get, post, put, delete) actions.
 
