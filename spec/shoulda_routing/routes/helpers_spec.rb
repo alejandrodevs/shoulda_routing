@@ -9,7 +9,7 @@ module ShouldaRouting
         it "returns string path accoring to an array" do
           stack    = [:users, :posts, :likes]
           expected = "/users/1/posts/1/likes"
-          expect(subject.route_path(stack)).to eq(expected)
+          expect(subject.route_path(stack, "/1/")).to eq(expected)
         end
       end
 
