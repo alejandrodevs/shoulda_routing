@@ -15,9 +15,10 @@ module ShouldaRouting
   end
 
   module Routes
-    autoload :Spec,    'shoulda_routing/routes/spec.rb'
-    autoload :Helpers, 'shoulda_routing/routes/helpers.rb'
-    autoload :STACK,   'shoulda_routing/routes/stack.rb'
+    autoload :Spec,     'shoulda_routing/routes/spec.rb'
+    autoload :Helpers,  'shoulda_routing/routes/helpers.rb'
+    autoload :Segments, 'shoulda_routing/routes/segments.rb'
+    autoload :STACK,    'shoulda_routing/routes/stack.rb'
   end
 end
 

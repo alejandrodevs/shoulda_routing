@@ -1,5 +1,5 @@
 module ShouldaRouting
   module Routes
-    STACK = []
+    STACK = Segments.new
   end
 end
