@@ -12,18 +12,23 @@ module ShouldaRouting
       end
 
       def routes
-        routes = route_permutations(self.namespaces + self.resources)
-        routes.map do |route|
-          permutations = {}
-          namespaces = route[0...self.namespaces.count]
-          resources  = route[self.namespaces.count...route.count]
+        permutations(stack).map do |segments|
+          namespaces = segments[0...self.namespaces.count]
+          resources  = segments[self.namespaces.count...segments.count]
 
-          permutations[:segments] = route
-          permutations[:url]      = route_path(namespaces, "/") + route_path(resources, "/1/")
-          permutations[:params]   = route_params(resources)
-          permutations[:controller] = route_path(namespaces + [route.last], "/").sub(/^\//, "")
-          permutations
+          options = {}
+          options[:segments]    = segments
+          options[:url]         = "/#{namespaces.join("/")}/#{resources.join("/1/")}"
+          options[:params]      = params(resources[0...-1])
+          options[:controller]  = (namespaces + [segments.last]).join("/")
+          options
         end
+      end
+
+      private
+
+      def stack
+        namespaces + resources
       end
     end
 
