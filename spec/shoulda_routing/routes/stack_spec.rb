@@ -26,7 +26,57 @@ module ShouldaRouting
       end
 
       describe "#routes" do
-        pending
+        it "returns an array of hashes with all the routes" do
+          subject.stub(:namespaces).and_return([[:admin], [:control]])
+          subject.stub(:resources).and_return([[:users], [:posts, :comments], [:likes]])
+          expected = [
+            {
+              segments:   [:admin, :control, :users, :posts, :likes],
+              url:        "/admin/control/users/1/posts/1/likes",
+              params:     {user_id: "1", post_id: "1"},
+              controller: "admin/control/likes"
+            },
+            {
+              segments:   [:admin, :control, :users, :comments, :likes],
+              url:        "/admin/control/users/1/comments/1/likes",
+              params:     {user_id: "1", comment_id: "1"},
+              controller: "admin/control/likes"
+            }
+          ]
+          expect(subject.routes).to eq expected
+        end
+
+        it "returns an array of hashes with all the routes" do
+          subject.stub(:namespaces).and_return([[:mobile], [:v1]])
+          subject.stub(:resources).and_return([[:users], [:posts, :comments], [:likes, :photos]])
+          expected = [
+            {
+              segments:   [:mobile, :v1, :users, :posts, :likes],
+              url:        "/mobile/v1/users/1/posts/1/likes",
+              params:     {user_id: "1", post_id: "1"},
+              controller: "mobile/v1/likes"
+            },
+            {
+              segments:   [:mobile, :v1, :users, :posts, :photos],
+              url:        "/mobile/v1/users/1/posts/1/photos",
+              params:     {user_id: "1", post_id: "1"},
+              controller: "mobile/v1/photos"
+            },
+            {
+              segments:   [:mobile, :v1, :users, :comments, :likes],
+              url:        "/mobile/v1/users/1/comments/1/likes",
+              params:     {user_id: "1", comment_id: "1"},
+              controller: "mobile/v1/likes"
+            },
+            {
+              segments:   [:mobile, :v1, :users, :comments, :photos],
+              url:        "/mobile/v1/users/1/comments/1/photos",
+              params:     {user_id: "1", comment_id: "1"},
+              controller: "mobile/v1/photos"
+            }
+          ]
+          expect(subject.routes).to eq expected
+        end
       end
 
       describe "-#stack" do

@@ -7,5 +7,5 @@ Coveralls::Output.silent = true
 
 require 'simplecov'
 SimpleCov.start do
-  minimum_coverage 80
+  minimum_coverage 85
 end
