@@ -11,6 +11,10 @@ module ShouldaRouting
         @namespaces ||= []
       end
 
+      def stack
+        namespaces + resources
+      end
+
       def routes
         permutations(stack).map do |segments|
           namespaces = segments[0...self.namespaces.count]
@@ -23,12 +27,6 @@ module ShouldaRouting
           options[:controller]  = (namespaces + [segments.last]).join("/")
           options
         end
-      end
-
-      private
-
-      def stack
-        namespaces + resources
       end
     end
 

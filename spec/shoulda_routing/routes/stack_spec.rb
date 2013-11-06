@@ -25,6 +25,14 @@ module ShouldaRouting
         end
       end
 
+      describe "#stack" do
+        it "returns an array with resources and namespaces" do
+          subject.stub(:namespaces).and_return([1,2,3])
+          subject.stub(:resources).and_return([4,5,6])
+          subject.send(:stack).should eq [1,2,3,4,5,6]
+        end
+      end
+
       describe "#routes" do
         it "returns an array of hashes with all the routes" do
           subject.stub(:namespaces).and_return([[:admin], [:control]])
@@ -43,7 +51,7 @@ module ShouldaRouting
               controller: "admin/control/likes"
             }
           ]
-          expect(subject.routes).to eq expected
+          subject.routes.should eq expected
         end
 
         it "returns an array of hashes with all the routes" do
@@ -75,15 +83,7 @@ module ShouldaRouting
               controller: "mobile/v1/photos"
             }
           ]
-          expect(subject.routes).to eq expected
-        end
-      end
-
-      describe "-#stack" do
-        it "returns an array with resources and namespaces" do
-          subject.stub(:namespaces).and_return([1,2,3])
-          subject.stub(:resources).and_return([4,5,6])
-          subject.send(:stack).should eq [1,2,3,4,5,6]
+          subject.routes.should eq expected
         end
       end
     end
