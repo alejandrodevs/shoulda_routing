@@ -7,7 +7,7 @@ module ShouldaRouting
 
       describe "initialize" do
         it { expect(subject.options).to eq({options: "options"})}
-        it { expect(subject.current).to eq([:admin]) }
+        it { expect(subject.target).to eq([:admin]) }
       end
 
       describe "#test!" do
