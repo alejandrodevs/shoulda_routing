@@ -22,9 +22,9 @@ module ShouldaRouting
 
           options = {}
           options[:segments]    = segments
-          options[:url]         = "/#{namespaces.join("/")}/#{resources.join("/1/")}"
+          options[:url]         = "/#{namespaces.join('/')}/#{resources.join('/1/')}"
           options[:params]      = params(resources[0...-1])
-          options[:controller]  = (namespaces + [segments.last]).join("/")
+          options[:controller]  = (namespaces + [segments.last]).join('/')
           options
         end
       end
@@ -42,7 +42,7 @@ module ShouldaRouting
         actions.each do |action, args|
           Routes::Spec.execute do |config|
             config.via        = args[:via]
-            config.path       = route[:url] + (args[:path] || "")
+            config.path       = route[:url] + (args[:path] || '')
             config.controller = options[:controller] || route[:controller]
             config.action     = action
             config.params     = route[:params].merge(args[:params] || {})
@@ -50,7 +50,6 @@ module ShouldaRouting
           end
         end
       end
-
     end
 
     STACK = Stack.new

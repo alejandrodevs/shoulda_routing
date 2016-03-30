@@ -1,7 +1,6 @@
 module ShouldaRouting
   module Namespaces
     class Base
-
       attr_accessor :target, :options, :block
 
       def initialize *args, &block

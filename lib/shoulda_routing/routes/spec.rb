@@ -1,13 +1,12 @@
 module ShouldaRouting
   module Routes
     class Spec
-
       attr_accessor :via, :path, :controller, :action, :params, :method
 
       def test!
         via         = @via        || :get
-        path        = @path       || "/"
-        controller  = @controller || ""
+        path        = @path       || '/'
+        controller  = @controller || ''
         action      = @action     || :index
         params      = @params     || {}
         method      = @method     || :to
@@ -24,7 +23,6 @@ module ShouldaRouting
         yield(generator) if block_given?
         generator.test!
       end
-
     end
   end
 end

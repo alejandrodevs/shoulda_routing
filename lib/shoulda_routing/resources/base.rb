@@ -1,7 +1,6 @@
 module ShouldaRouting
   module Resources
     class Base
-
       attr_accessor :target, :options, :block
 
       def initialize *args, &block
@@ -45,7 +44,6 @@ module ShouldaRouting
           actions.select{ |action, args| !routeable_actions.include?(action) }
         end
       end
-
     end
   end
 end

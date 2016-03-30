@@ -1,18 +1,18 @@
-require "bundler/gem_tasks"
+require 'bundler/gem_tasks'
 
 namespace :spec do
-  desc "Runs unit tests"
+  desc 'Runs unit tests'
   task :unit do
-    system("bundle exec rspec")
+    system('bundle exec rspec')
   end
 
-  desc "Run all tests"
+  desc 'Run all tests'
   task :all do
     Rake.application['spec:unit'].invoke
-    raise "Unit testing failed!" unless $?.exitstatus == 0
+    raise 'Unit testing failed!' unless $?.exitstatus == 0
 
-    system("bundle exec cucumber")
-    raise "Integration testing failed!" unless $?.exitstatus == 0
+    system('bundle exec cucumber')
+    raise 'Integration testing failed!' unless $?.exitstatus == 0
   end
 end
 
