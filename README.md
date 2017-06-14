@@ -1,9 +1,13 @@
 # ShouldaRouting
-[![Build Status](https://travis-ci.org/alejandrodevs/shoulda_routing.png?branch=master)](https://travis-ci.org/alejandrodevs/shoulda_routing) [![Coverage Status](https://coveralls.io/repos/github/alejandrodevs/shoulda_routing/badge.svg?branch=master)](https://coveralls.io/github/alejandrodevs/shoulda_routing?branch=master)
-
 
 This gem aims to provide a simple DSL that looks like the rails routes DSL that is used in the routes.rb file.
 This requires the [RSpec](https://github.com/rspec/rspec-rails) testing framework.
+
+## Important
+
+This gem is deprecated because this was created by me when I didn't know
+what and how to test applications. It's not longer maintained and I
+recommend you not to use it.
 
 ## Installation
 
